@@ -161,18 +161,16 @@ function startTimer() {
 
   // Estado inicial
   timerText.textContent = formatTime(remaining);
-  timerFill.style.transition = "none";
   timerFill.style.width = "100%";
   timerWrap.classList.remove("low");
 
-  // Forzar reflow para que la transición arranque desde 100%
-  void timerFill.offsetWidth;
-  timerFill.style.transition = "width 1s linear";
-  timerFill.style.width = "0%";
-
   timerId = setInterval(() => {
     remaining--;
+
+    // Actualizar texto y barra
     timerText.textContent = formatTime(remaining);
+    const pct = Math.max(0, (remaining / TIMER_SECONDS) * 100);
+    timerFill.style.width = pct + "%";
 
     if (remaining <= 10) timerWrap.classList.add("low");
 
