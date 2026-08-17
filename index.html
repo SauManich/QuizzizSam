@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nueva Pregunta</title>
+  <title>Examen Recuperatorio</title>
 
   <!-- Favicon (pestaña del navegador) -->
   <link rel="icon" type="image/png" href="icons/logoQui.png" />
@@ -11,7 +11,7 @@
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#6c3ec2" />
+  <meta name="theme-color" content="#E56402" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="QuizzizSam" />
@@ -25,7 +25,7 @@
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: #ececec url("Fondo.jpeg") center center / cover no-repeat;
+      background: #ececec url("logoOfiQui.png") center center / cover no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -36,31 +36,16 @@
       opacity: 0;
       visibility: hidden;
     }
-    #splash .splash-loader {
-      position: absolute;
-      bottom: 12%;
-      width: 54px;
-      height: 54px;
-      border: 6px solid rgba(255, 255, 255, 0.5);
-      border-top-color: #6c3ec2;
-      border-radius: 50%;
-      animation: splash-spin 0.9s linear infinite;
-    }
-    @keyframes splash-spin {
-      to { transform: rotate(360deg); }
-    }
   </style>
 </head>
 <body>
   <!-- Pantalla de carga inicial (3 segundos) -->
-  <div id="splash">
-    <div class="splash-loader"></div>
-  </div>
+  <div id="splash"></div>
 
   <main class="wrapper">
     <button id="newQuestionBtn" class="host-btn">Nueva Pregunta</button>
 
-    <h2 class="subtitle">1. Elige tu pregunta</h2>
+    <h2 class="subtitle"> Elige tu pregunta</h2>
 
     <!-- Carrusel / Ruleta -->
     <div class="carousel-viewport">

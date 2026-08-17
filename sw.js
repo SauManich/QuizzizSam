@@ -1,5 +1,5 @@
 // Service Worker - QuizzizSam PWA
-const CACHE_NAME = "quizzizsam-v2";
+const CACHE_NAME = "quizzizsam-v3";
 const ASSETS = [
   "./",
   "./index.html",
