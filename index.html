@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nueva Pregunta</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#6c3ec2" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="QuizzizSam" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrapper">
+    <button id="newQuestionBtn" class="host-btn">Nueva Pregunta</button>
+
+    <h2 class="subtitle">1. Elige tu pregunta</h2>
+
+    <!-- Carrusel / Ruleta -->
+    <div class="carousel-viewport">
+      <div class="carousel-marker"></div><br>
+      <div id="carouselTrack" class="carousel-track"></div>
+    </div>
+
+    <div id="infoBox" class="info-box">
+      Presiona <strong>Nueva Pregunta</strong> para girar la ruleta.
+    </div>
+  </main>
+
+  <!-- Pantalla completa -->
+  <div id="fullscreen" class="fullscreen">
+    <button id="closeFullscreen" class="close-btn" aria-label="Cerrar">&times;</button>
+    <img id="fullscreenImg" class="fullscreen-img" src="" alt="Pregunta" />
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("sw.js")
+          .catch((err) => console.warn("SW no registrado:", err));
+      });
+    }
+  </script>
+</body>
+</html>
