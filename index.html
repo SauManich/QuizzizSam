@@ -5,17 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nueva Pregunta</title>
 
+  <!-- Favicon (pestaña del navegador) -->
+  <link rel="icon" type="image/png" href="icons/logoQui.png" />
+  <link rel="shortcut icon" type="image/png" href="icons/logoQui.png" />
+
   <!-- PWA -->
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#6c3ec2" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="QuizzizSam" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/logoQui.png" />
 
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Estilos de la pantalla de carga -->
+  <style>
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #ececec url("Fondo.jpeg") center center / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #splash.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+    #splash .splash-loader {
+      position: absolute;
+      bottom: 12%;
+      width: 54px;
+      height: 54px;
+      border: 6px solid rgba(255, 255, 255, 0.5);
+      border-top-color: #6c3ec2;
+      border-radius: 50%;
+      animation: splash-spin 0.9s linear infinite;
+    }
+    @keyframes splash-spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
+  <!-- Pantalla de carga inicial (3 segundos) -->
+  <div id="splash">
+    <div class="splash-loader"></div>
+  </div>
+
   <main class="wrapper">
     <button id="newQuestionBtn" class="host-btn">Nueva Pregunta</button>
 
@@ -40,6 +81,14 @@
 
   <script src="main.js"></script>
   <script>
+    // Pantalla de carga: se muestra 3 segundos y luego pasa al quiz
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        const splash = document.getElementById("splash");
+        if (splash) splash.classList.add("hide");
+      }, 3000);
+    });
+
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker
