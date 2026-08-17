@@ -133,11 +133,60 @@ function finishSpin(index) {
 function openFullscreen(src) {
   fullscreenImg.src = src;
   fullscreen.classList.add("open");
+  startTimer();
 }
 
 function closeFullscreen() {
+  stopTimer();
   fullscreen.classList.remove("open");
   fullscreenImg.src = "";
+}
+
+// ====== Temporizador (1 minuto) ======
+const TIMER_SECONDS = 60;
+let timerId = null;
+const timerText = document.getElementById("timerText");
+const timerFill = document.getElementById("timerFill");
+const timerWrap = document.querySelector(".timer");
+
+function formatTime(s) {
+  const m = String(Math.floor(s / 60)).padStart(2, "0");
+  const sec = String(s % 60).padStart(2, "0");
+  return `${m}:${sec}`;
+}
+
+function startTimer() {
+  stopTimer();
+  let remaining = TIMER_SECONDS;
+
+  // Estado inicial
+  timerText.textContent = formatTime(remaining);
+  timerFill.style.transition = "none";
+  timerFill.style.width = "100%";
+  timerWrap.classList.remove("low");
+
+  // Forzar reflow para que la transición arranque desde 100%
+  void timerFill.offsetWidth;
+  timerFill.style.transition = "width 1s linear";
+  timerFill.style.width = "0%";
+
+  timerId = setInterval(() => {
+    remaining--;
+    timerText.textContent = formatTime(remaining);
+
+    if (remaining <= 10) timerWrap.classList.add("low");
+
+    if (remaining <= 0) {
+      closeFullscreen(); // se cierra solo al terminar el tiempo
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  if (timerId) {
+    clearInterval(timerId);
+    timerId = null;
+  }
 }
 
 // ====== Eventos ======
